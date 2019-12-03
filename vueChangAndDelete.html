@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div class="main_box" id="app">
+    <table>
+      <thead>
+        <tr>
+          <th>用户名</th>
+          <th>年龄</th>
+          <th>成绩</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <template v-for="(item, index) in row" v-bind:key="index" >
+          <tr :id="item.id">
+            <td>{{item.name}}</td>
+            <td>{{item.age}}</td>
+            <td>{{item.mark}}</td>
+            <td>
+              <span @click="change(item)">编辑</span> &nbsp;&nbsp;
+              <span  @click="deleteFun(item.id)">删除</span>
+            </td>
+          </tr>
+        </template>
+        <tr >
+          <td><input type="text" v-model="backTemplate.name"></td>
+          <td><input type="text" v-model="backTemplate.age"></td>
+          <td><input type="text" v-model="backTemplate.mark"></td>
+          <td>
+            <span @click="save()">保存</span>
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
+<script type="text/javascript" src="./js/vue.min.js"></script>
+<script>
+var myVue = new Vue({
+  el: '#app',
+  data: {
+    row: [
+      {'id':1, 'name': '张飒', 'age': '18', 'mark': 'A'},
+      {'id':2, 'name': '张2', 'age': '18', 'mark': 'A+'},
+      {'id':3, 'name': '张3', 'age': '18', 'mark': 'A_'},
+      {'id':4, 'name': '张4', 'age': '18', 'mark': 'A-'},
+      {'id':5, 'name': '张5', 'age': '18', 'mark': 'A-'}
+    ],
+    backTemplate: {'id':0, 'name': '', 'age': '', 'mark': ''}
+  },
+  watch: {
+    backTemplate: {
+      handler(n,o) {
+        if(n) {
+          console.log('n', n);
+          this.backTemplate = n;
+        }
+      },
+      deep: true
+    }
+  },
+  methods: {
+    save() {
+      let that = this;
+      console.log('that.backTemplate.name', that.backTemplate.name);
+      console.log('that.backTemplate.age', that.backTemplate.age);
+      console.log('that.backTemplate.mark', that.backTemplate.mark);
+     
+      if (that.backTemplate.id == 0) {
+        if (that.backTemplate.name && that.backTemplate.age && that.backTemplate.mark) {
+          that.backTemplate.id = that.row.length + 1;
+        that.row.push(that.backTemplate);
+        } else {
+          alert('请填写完整。')
+        }
+      } else {
+        if (that.backTemplate.name && that.backTemplate.age && that.backTemplate.mark) {
+          console.log('修改成功');
+          that.backTemplate= {'id':0, 'name': '', 'age': '', 'mark': ''}
+        } else {
+          alert('请填写完整。')
+        }
+      }
+    },
+    deleteFun(id) {
+      let that = this;
+      debugger
+      for(let i=0;i<that.row.length;i++) {
+        if(that.row[i].id == id) {
+          that.row.splice(i,1);
+          break
+        }
+      }
+    },
+    change(item) {
+      let that = this;
+      that.backTemplate = item;
+    }
+  },
+})
+</script>

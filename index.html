@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  var promise = new Promise((resolve, reject) => {
+    console.log(resolve);
+  })
+  .then(() => {
+
+  })
+  .catch(() => {
+    
+  })
+
+  if (!Object.create) {
+    Object.create = function (o) {
+      function F() {}
+      F.prototype = o;
+      return new F();
+    }
+  }
+
+  var Task = {
+    setID: function(ID) {this.id=ID},
+    outputID: function() {console.log(this.id);}
+  };
+
+  var XYZ = Object.create(Task);
+
+  XYZ.prepareTask = function(ID, Label) {
+    this.setID(ID);
+    this.label = Label;
+  }
+
+  XYZ.outPutTaskDetails = function() {
+    this.outputID();
+    console.log(this.label);
+  }
+
+  function Foo(who) {
+    this.me = who;
+  }
+
+  Foo.prototype.identify = function() {
+    return 'I am ' + this.me;
+  }
+
+  function Bar(who) {
+    Foo.call(this, who)
+  }
+
+  Bar.prototype = Object.create(Foo.prototype);
+  Bar.prototype.speak = function() {
+    alert('Hello' + this.identify());
+  }
+
+  function Widget(width, height) {
+    this.width = width || 50;
+    this.height = height || 50;
+    this.$elem = null;
+  }
+
+  Widget.prototype.render = function($where) {
+    if (this.$elem) {
+      this.$elem.css({
+        width: this.width + 'px',
+        height: this.height + 'px'
+      }).appendTo($where)
+    }
+  };
+
+  // 子类
+  function Button(width, height, label) {
+    // 调用 super 构造函数
+    Widget.call(this, width, height);
+    this.label = label || "Default";
+    this.$elem = $('<button>').text(this.label);
+  }
+
+  // 让Button继承Widget
+  Button.prototype = Object.create(Widget.prototype);
+
+  // 重新render(..)
+  Button.prototype.render = function($where) {
+    // 调用super
+    Widget.prototype.render.call(this, $where);
+    this.$elem.click(this.onClick.bind(this));
+  }
+
+  
+</script>

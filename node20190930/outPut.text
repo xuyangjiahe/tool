@@ -1,0 +1,6 @@
+{
+  'name': 'Andy',
+  'action': [
+    'say', 'move
+  ]
+}

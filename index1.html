@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  // for(var i=1;i<5;i++) {
+  //   (function a(j) {
+  //     setTimeout(() => {
+  //       console.log(j);
+  //     }, 0)
+  //   })(i)
+  // }
+  // for(var k=1;k<5;k++) {
+  //   setTimeout((i) => {
+  //     console.log(i);
+  //   },0, k )
+  // }
+  
+  // function P3() {
+  //   this.name = 'p3';
+  //   this.play = [1,2,3];
+  // }
+
+  // function c3() {
+  //   P3.call(this);
+  //   this.type = 'c3';
+  // }
+
+  // c3.prototype = new P3();
+  // var s3 = new c3();
+  // var s4 = new c3();
+  // s3.play.push(5);
+
+  // console.log(s3.play, s4.play);
+
+  // 寄生继承
+  // function p5() {
+  //   this.name = 'p5';
+  //   this.play = [1,2,3];
+  // }
+
+  // function c5() {
+  //   p5.call(this);
+  //   this.type = 'c5';
+  // }
+
+  // c5.prototype = Object.create(p5.prototype);
+  // c5.prototype.constructor = c5;
+
+  // console.log([] == ![]);
+  console.log('start1');
+  setTimeout(() => {
+    console.log('timeout2');
+  });
+  Promise.resolve().then(() => {
+    console.log('resolve3');
+  });
+  console.log('end4');
+
+
+</script>

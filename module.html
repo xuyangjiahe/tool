@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  // this is a module text file;
+  // function foo() { console.log( a );} // 3（不是 2 ！） }
+  // function bar() {
+  //   var a = 3; foo(); 
+  // }
+  // var a = 2; bar();
+
+  // function foo(num) {
+  //   console.log('foo:', num);
+  //   // 记录foo被调用的次数
+  //   this.count ++;
+  // }
+
+  // foo.count = 0;
+  // var i;
+  // for (i=0;i<10;i++) {
+  //   if(i>5) {
+  //     // 使用call()确保this指向函数本身foo
+  //     foo.call(foo, i);
+  //   }
+  // }
+
+  // console.log(foo.count);
+let arr = [1,2,3,4,56,5];
+for (valu of arr) {
+  console.log(valu);
+}
+
+var myObject = {
+  a: 2,
+  b: 3
+};
+
+Object.defineProperty(myObject, Symbol.iterator, {
+  enumerable: false,
+  writable: false,
+  configurable: true,
+  value: function() {
+    var o = this;
+    var idx = 0;
+    var ks = Object.keys(o);
+    return {
+       next: function () {
+         return {
+           value: o[ks[idx++]],
+           done: (idx > ks.length)
+         }
+       }
+    }
+  }
+})
+
+class CoolGuy {
+  specialTrick = nothing;
+
+  CoolGuy(trick) {
+    specialTrick = trick;
+  }
+
+  showOff() {
+    output('Here is my trick:', specialTrick )
+  }
+}
+
+function mixin(sourceObj, targetObj) {
+  for (var key in sourceObj) {
+    if(!(key in targetObj)) {
+      targetObj[key] = sourceObj[key];
+    }
+  }
+
+  return targetObj;
+}
+
+var VEhicle = {
+  engines: 1,
+  lgnition: function() {
+    console.log('Turning on my engine.');
+  },
+  drive: function () {
+    this.ignition();
+    console.log('Steering and moving forward!');
+  }
+};
+
+// var Car = mixin(Vehicle, {
+//   wheels: 4,
+//   drive: function() {
+//     Vehicle.drive.call(this);
+//     console.log("Rolling on all", this.wheels + "wheels!");
+//   }
+// })
+
+function comFun() {
+  console.log('this is a common function');
+}
+
+console.log(comFun);
+
+var a = new comFun();
+
+console.log(a);
+
+function Foo(name) {
+  this.name = name;
+}
+
+Foo.prototype.myName = function() {
+  return this.name;
+}
+
+var b = new Foo('b');
+var c = new Foo('c');
+
+console.log('b.myName:', b.myName());
+console.log('c.myName:', c.myName());
+
+</script>
